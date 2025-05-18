@@ -1,0 +1,218 @@
+/* styles.css */
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --info-color: #0dcaf0;
+    --light-bg: #f8f9fa;
+    --dark-bg: #212529;
+}
+
+/* Globala stilar */
+body {
+    padding-top: 40px; /* För fixed navbar */
+    min-height: 100vh;
+    margin: auto;
+    background-color: var(--light-bg);
+    
+}
+
+/* Navbar anpassningar */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Kort-stilar */
+.band-card {
+    transition: box-shadow 0.2s, transform 0.2s;
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background: rgba(133, 132, 132, 0.1);
+        min-height: 250px;
+        padding: 0.5rem;
+        margin-bottom: 12px;
+        font-size: 1.15rem;
+}
+.band-card:hover {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+    transform: translateY(-4px) scale(1.05);
+}
+.card .btn {
+    font-size: 1.1rem;
+    font-weight: 500;
+ }
+.card-title {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+#bands-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 23px;
+    justify-content: center;
+}
+
+/* Söksida specifika stilar */
+.search-wrapper {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+.search-wrapper .input-group {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-wrapper .input-group-text {
+    border-right: none;
+}
+
+.search-wrapper .form-control {
+    border-left: none;
+}
+
+.search-wrapper .form-control:focus {
+    box-shadow: none;
+    border-color: #ced4da;
+}
+
+/* Lista-sida specifika stilar */
+ #bands-container .list-group-item {
+    border: none;
+    margin-bottom: 0.5rem;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+#bands-container .list-group-item:hover {
+    background-color: var(--light-bg);
+} 
+
+/* Pagination anpassningar */
+ .pagination .page-link {
+    border: none;
+    margin: 0 2px;
+    border-radius: 5px;
+    color: var(--primary-color);
+} 
+
+.pagination .page-item.active .page-link {
+    background-color: var(--primary-color);
+    color: white;
+} 
+
+/* Loading spinner */
+ .spinner-border {
+    width: 3rem;
+    height: 3rem;
+} 
+
+/* Responsiva anpassningar */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .search-wrapper {
+        padding: 1rem;
+    }
+}
+
+/* Animationer */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+} 
+
+/* Lägg till i din befintliga styles.css */
+
+/* Lista-sida specifika stilar */
+/* #bands-container .card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+} */
+
+/* #bands-container .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+} */
+
+/* #bands-container .card-body {
+    padding: 1.5rem;
+} */
+
+/* #bands-container .card-title {
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+} */
+
+/* Pagination anpassningar */
+/* .pagination {
+    margin-top: 2rem;
+} */
+
+/* .pagination .page-link {
+    border: none;
+    margin: 0 2px;
+    border-radius: 5px;
+    color: var(--primary-color);
+} */
+
+/* .pagination .page-item.active .page-link {
+    background-color: var(--primary-color);
+    color: white;
+} */
+
+/* Loading indicator */
+/* #loading-indicator {
+    margin: 2rem 0;
+}
+
+/* Error container */
+/* #error-container {
+    margin: 1rem 0;
+} */
+
+/* .band-card:hover {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.15) !important;
+    border-color: #0d6efd;
+} */ 
+
+/* #bands-container {
+    margin-left: auto;
+    margin-right: auto;
+} */
+
+/* Mindre, snyggare listkort */
+.list-card {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.7rem;
+    min-height: 48px;
+    transition: box-shadow 0.2s;
+}
+.list-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    background: #f8f9fa;
+}
+.list-card .icon {
+    font-size: 1.7rem;
+    margin-right: 1rem;
+}
+@media (max-width: 768px) {
+    .list-card { font-size: 1rem; padding: 0.5rem; }
+}
+

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>Artister</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/styles/styles.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <!-- <a class="navbar-brand" href="index.html">Musikgrupper</a> -->
+            <img src="assets/img/Music.png" alt="Logo" width="70">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Hem</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="music-groups.html">Lista</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="search.html">Sök</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mt-5 pt-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Hem</a></li>
+                <li class="breadcrumb-item active" aria-current="page" id="band-name">Alla artister</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="container mt-5">
+        <h1 class="mb-4 text-center"><i class="bi bi-person-badge text-info"></i> Alla artister</h1>
+        <div id="artists-list" class="row justify-content-center"></div>
+        <a href="index.html" class="btn btn-outline-primary mt-4 d-block mx-auto" style="max-width:200px;"><i class="bi bi-house"></i> Tillbaka</a>
+    </div>
+    <script type="module">
+        import MusicService from './assets/js/music-service.js';
+        const service = new MusicService('https://seido-webservice-307d89e1f16a.azurewebsites.net/api');
+        const artistsList = document.getElementById('artists-list');
+        (async () => {
+            try {
+                const data = await service.getArtists(0, 30);
+                artistsList.innerHTML = data.pageItems.map(artist => `
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <div class="list-card">
+                            <i class="bi bi-person-badge text-info icon"></i>
+                            <span>${artist.firstName} ${artist.lastName}</span>
+                        </div>
+                    </div>
+                `).join('');
+            } catch {
+                artistsList.innerHTML = '<div class="alert alert-danger">Kunde inte ladda artister.</div>';
+            }
+        })();
+    </script>
+</body>
+</html>

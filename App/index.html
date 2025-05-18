@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musikgrupper - Hem</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/styles/styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <img src="assets/img/Music.png" alt="Logo" width="70">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Hem</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="music-groups.html">Lista</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="search.html">Sök</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5 pt-4">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h1 class="display-4">Välkommen till Musikgrupper</h1>
+                <p class="lead">Utvecklad av Shahlan Mourad</p>
+            </div>
+        </div>
+        
+        <!-- Stats Container -->
+        <div id="stats-container" class="row">
+            <!-- Stats will be loaded here by home.js -->
+            <div class="col-12 text-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Laddar...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="row mt-5">
+            <div class="col-md-6 offset-md-3 text-center">
+                <div class="d-grid gap-3">
+                    <img src="./assets/img/Music.png" alt="Logo" width="500" height="200">
+                    <a href="search.html" class="btn btn-outline-primary btn-lg">
+                        <i class="bi bi-search me-2"></i>Sök musikgrupper
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/index.js"></script>
+</body>
+</html>
