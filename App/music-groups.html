@@ -24,7 +24,7 @@
                         <a class="nav-link" href="index.html">Hem</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="music-groups.html">Lista</a>
+                        <a class="nav-link" href="music-groups.html">Musikgrupper</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="search.html">Sök</a>
@@ -33,37 +33,44 @@
             </div>
         </div>
     </nav>
-
-    <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container mt-5 pt-4">
-    <h1 class="mb-4 text-center">Alla Musikgrupper</h1>
     
-    <!-- Loading Indicator -->
-    <div id="loading-indicator" class="text-center my-4" style="display: none;">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Laddar...</span>
-        </div>
-        <p class="mt-2">Hämtar musikgrupper...</p>
+    <!-- Main Content -->
+    <div class="container mt-5 pt-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Hem</a></li>
+                <li class="breadcrumb-item active" aria-current="page" id="band-name">Alla artister</li>
+            </ol>
+        </nav>
     </div>
-
-    <!-- Error Message Container -->
-    <div id="error-container" class="alert alert-danger" style="display: none;"></div>
-
-    <!-- Bands Container -->
-    <div class="d-flex justify-content-center">
-        <div id="bands-container" class="container mt-5 pt-4" style="max-width: 1800px;">
-            <!-- Bands will be loaded here -->       
+    <div class="container mt-5 pt-4">
+        <h1 class="mb-4 text-center">Alla Musikgrupper</h1>
+        
+        <!-- Loading Indicator -->
+        <div id="loading-indicator" class="text-center my-4" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Laddar...</span>
+            </div>
+            <p class="mt-2">Hämtar musikgrupper...</p>
         </div>
-    </div>
 
-    <!-- Pagination -->
-    <nav aria-label="Page navigation" class="mt-4">
-        <ul class="pagination justify-content-center" id="pagination">
-            <!-- Pagination links will be inserted here by JavaScript -->
-        </ul>
-    </nav>
-</div>
+        <!-- Error Message Container -->
+        <div id="error-container" class="alert alert-danger" style="display: none;"></div>
+        
+        <!-- Bands Container -->
+        <div class="d-flex justify-content-center">
+            <div id="bands-container" class="container mt-5 pt-4" style="max-width: 1800px;">
+                <!-- Bands will be loaded here -->       
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <nav aria-label="Page navigation" class="mt-4">
+            <ul class="pagination justify-content-center" id="pagination">
+                <!-- Pagination links will be inserted here by JavaScript -->
+            </ul>
+        </nav>
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

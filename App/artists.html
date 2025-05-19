@@ -10,6 +10,7 @@
     <link href="assets/styles/styles.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <!-- <a class="navbar-brand" href="index.html">Musikgrupper</a> -->
@@ -23,7 +24,7 @@
                         <a class="nav-link" href="index.html">Hem</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="music-groups.html">Lista</a>
+                        <a class="nav-link" href="music-groups.html">Musikgrupper</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="search.html">Sök</a>
@@ -33,6 +34,7 @@
         </div>
     </nav>
     
+    <!-- Main Content -->
     <div class="container mt-5 pt-4">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -41,30 +43,25 @@
             </ol>
         </nav>
     </div>
+
     <div class="container mt-5">
         <h1 class="mb-4 text-center"><i class="bi bi-person-badge text-info"></i> Alla artister</h1>
-        <div id="artists-list" class="row justify-content-center"></div>
-        <a href="index.html" class="btn btn-outline-primary mt-4 d-block mx-auto" style="max-width:200px;"><i class="bi bi-house"></i> Tillbaka</a>
+        <div id="artists-list" class="row justify-content-center">
+            <div class="col-12 text-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Laddar...</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pagination -->
+        <nav aria-label="Page navigation" class="mt-4">
+            <ul class="pagination justify-content-center" id="artists-pagination">
+                <!-- Pagination links will be inserted here by JavaScript -->
+            </ul>
+        </nav>
     </div>
-    <script type="module">
-        import MusicService from './assets/js/music-service.js';
-        const service = new MusicService('https://seido-webservice-307d89e1f16a.azurewebsites.net/api');
-        const artistsList = document.getElementById('artists-list');
-        (async () => {
-            try {
-                const data = await service.getArtists(0, 30);
-                artistsList.innerHTML = data.pageItems.map(artist => `
-                    <div class="col-12 col-md-6 col-lg-4 mb-3">
-                        <div class="list-card">
-                            <i class="bi bi-person-badge text-info icon"></i>
-                            <span>${artist.firstName} ${artist.lastName}</span>
-                        </div>
-                    </div>
-                `).join('');
-            } catch {
-                artistsList.innerHTML = '<div class="alert alert-danger">Kunde inte ladda artister.</div>';
-            }
-        })();
-    </script>
+
+    <script src="assets/js/artists.js" type="module"></script>
 </body>
 </html>

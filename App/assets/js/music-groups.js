@@ -1,6 +1,65 @@
 'use strict';
 import MusicService from "./music-service.js";
 
+// Exportera funktionen på toppnivå
+export function renderPagination({currentPage, totalPages, onPageChange, paginationElement}) {
+  let paginationHTML = "";
+  const maxVisible = 5;
+  const sideCount = 1;
+  if (totalPages <= 1) {
+    paginationElement.innerHTML = "";
+    return;
+  }
+  // Previous button
+  paginationHTML += `
+    <li class="page-item ${currentPage === 0 ? "disabled" : ""}">
+      <a class="page-link" href="#" data-page="${currentPage - 1}">&laquo;</a>
+    </li>`;
+  // First page
+  if (currentPage > sideCount + 1) {
+    paginationHTML += `
+      <li class="page-item"><a class="page-link" href="#" data-page="0">1</a></li>
+      <li class="page-item disabled"><span class="page-link">...</span></li>
+    `;
+  }
+  // Main page numbers
+  let start = Math.max(currentPage - 2, 0);
+  let end = Math.min(currentPage + 2, totalPages - 1);
+  if (start <= sideCount) start = 0;
+  if (end >= totalPages - sideCount - 1) end = totalPages - 1;
+  for (let i = start; i <= end; i++) {
+    if (i === 0 && currentPage > sideCount + 1) continue; // Avoid duplicate 1
+    if (i === totalPages - 1 && currentPage < totalPages - sideCount - 2) continue; // Avoid duplicate last
+    paginationHTML += `
+      <li class="page-item ${currentPage === i ? "active" : ""}">
+        <a class="page-link" href="#" data-page="${i}">${i + 1}</a>
+      </li>`;
+  }
+  // Last page
+  if (currentPage < totalPages - sideCount - 2) {
+    paginationHTML += `
+      <li class="page-item disabled"><span class="page-link">...</span></li>
+      <li class="page-item"><a class="page-link" href="#" data-page="${totalPages - 1}">${totalPages}</a></li>
+    `;
+  }
+  // Next button
+  paginationHTML += `
+    <li class="page-item ${currentPage === totalPages - 1 ? "disabled" : ""}">
+      <a class="page-link" href="#" data-page="${currentPage + 1}">&raquo;</a>
+    </li>`;
+  paginationElement.innerHTML = paginationHTML;
+  paginationElement.querySelectorAll(".page-link").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const newPage = parseInt(e.target.dataset.page);
+      if (!isNaN(newPage) && newPage >= 0 && newPage < totalPages && newPage !== currentPage) {
+        onPageChange(newPage);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+  });
+}
+
 // DOM-element, Waits for the DOM to be fully loaded before executing the script.
 document.addEventListener("DOMContentLoaded", () => {
   const API_BASE_URL =
@@ -71,102 +130,16 @@ document.addEventListener("DOMContentLoaded", () => {
     bandsContainer.innerHTML = html; // Inserts generated HTML into the container.
   }
 
-  // Builds pagination controls based on the current page and total pages.
+  // Byt ut updatePagination mot anrop till renderPagination
   function updatePagination() {
-    let paginationHTML = "";
-    const maxVisible = 5; // Maximum number of visible page buttons.
-    const sideCount = 1; // Number of additional pages shown on either side.
-
-    // Adds the "previous" button.
-    paginationHTML += `
-            <li class="page-item ${currentPage === 0 ? "disabled" : ""}">
-                <a class="page-link" href="#" data-page="${
-                  currentPage - 1
-                }">&laquo;</a>
-            </li>`;
-    // Handles the first page and dots if needed.
-    if (currentPage > sideCount + 1) {
-      paginationHTML += `
-                <li class="page-item">
-                    <a class="page-link" href="#" data-page="0">1</a>
-                </li>
-                <li class="page-item disabled"><span class="page-link">...</span></li>
-            `;
-    } else {
-      for (let i = 0; i < Math.min(currentPage, sideCount); i++) {
-        paginationHTML += `
-                    <li class="page-item ${currentPage === i ? "active" : ""}">
-                        <a class="page-link" href="#" data-page="${i}">${
-          i + 1
-        }</a>
-                    </li>`;
-      }
-    }
-    // // Generates numbered pagination links.
-    let start = Math.max(currentPage - 2, sideCount);
-    let end = Math.min(currentPage + 2, totalPages - sideCount - 1);
-    for (let i = start; i <= end; i++) {
-      if (i >= sideCount && i < totalPages - sideCount) {
-        paginationHTML += `
-                    <li class="page-item ${currentPage === i ? "active" : ""}">
-                        <a class="page-link" href="#" data-page="${i}">${
-          i + 1
-        }</a>
-                    </li>`;
-      }
-    }
-    // Handles the last page and dots if needed.
-    if (currentPage < totalPages - sideCount - 2) {
-      paginationHTML += `
-                <li class="page-item disabled"><span class="page-link">...</span></li>
-                <li class="page-item">
-                    <a class="page-link" href="#" data-page="${
-                      totalPages - 1
-                    }">${totalPages}</a>
-                </li>
-            `;
-    } else {
-      for (
-        let i = Math.max(totalPages - sideCount, end + 1);
-        i < totalPages;
-        i++
-      ) {
-        paginationHTML += `
-                    <li class="page-item ${currentPage === i ? "active" : ""}">
-                        <a class="page-link" href="#" data-page="${i}">${
-          i + 1
-        }</a>
-                    </li>`;
-      }
-    }
-    // Adds the "next" button.
-    paginationHTML += `
-            <li class="page-item ${
-              currentPage === totalPages - 1 ? "disabled" : ""
-            }">
-                <a class="page-link" href="#" data-page="${
-                  currentPage + 1
-                }">&raquo;</a>
-            </li>`;
-
-    pagination.innerHTML = paginationHTML; // Inserts pagination controls into the DOM.
-
-    // Adds click listeners to pagination links.
-    pagination.querySelectorAll(".page-link").forEach((link) => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const newPage = parseInt(e.target.dataset.page);
-        if (
-          !isNaN(newPage) &&
-          newPage >= 0 &&
-          newPage < totalPages &&
-          newPage !== currentPage
-        ) {
-          currentPage = newPage;
-          loadBands();
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-      });
+    renderPagination({
+      currentPage,
+      totalPages,
+      onPageChange: (newPage) => {
+        currentPage = newPage;
+        loadBands();
+      },
+      paginationElement: pagination
     });
   }
 
