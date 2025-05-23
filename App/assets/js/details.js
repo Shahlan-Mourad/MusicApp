@@ -60,11 +60,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </li>
                 <li class="list-group-item">
                   <strong><i class="bi bi-person-badge text-info me-2"></i>Antal artister:</strong> 
-                  ${band.artists.length}
+                  ${band.artists ? band.artists.length : 0}
                 </li>
                 <li class="list-group-item">
                   <strong><i class="bi bi-disc text-success me-2"></i>Antal album:</strong> 
-                  ${band.albums.length}
+                  ${band.albums ? band.albums.length : 0}
                 </li>
               </ul>
             </div>
@@ -75,29 +75,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     bandInfo.innerHTML = html;
 
     // Update artists
-    artistsList.innerHTML = band.artists.length > 0
-      ? band.artists.map(artist => `
-          <div class="list-group-item">
-            <div class="d-flex align-items-center">
-              <i class="bi bi-person text-info me-2"></i>
-              <span>${artist.firstName} ${artist.lastName}</span>
-            </div>
+    if (band.artists && band.artists.length > 0) {
+      artistsList.innerHTML = band.artists.map(artist => `
+        <div class="list-group-item">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-person text-info me-2"></i>
+            <span>${artist.firstName} ${artist.lastName}</span>
           </div>
-        `).join('')
-      : '<div class="list-group-item">Inga artister hittades för denna grupp.</div>';
+        </div>
+      `).join('');
+    } else {
+      artistsList.innerHTML = '<div class="list-group-item">Inga artister hittades för denna grupp.</div>';
+    }
 
     // Update albums
-    albumsList.innerHTML = band.albums.length > 0
-      ? band.albums.map(album => `
-          <div class="list-group-item">
-            <div class="d-flex align-items-center">
-              <i class="bi bi-disc text-success me-2"></i>
-              <span>${album.name}</span>
-              ${album.releaseYear ? `<span class="ms-2 text-muted">(${album.releaseYear})</span>` : ''}
-            </div>
+    if (band.albums && band.albums.length > 0) {
+      albumsList.innerHTML = band.albums.map(album => `
+        <div class="list-group-item">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-disc text-success me-2"></i>
+            <span>${album.name}</span>
+            ${album.releaseYear ? `<span class="ms-2 text-muted">(${album.releaseYear})</span>` : ''}
           </div>
-        `).join('')
-      : '<div class="list-group-item">Inga album hittades för denna grupp.</div>';
+        </div>
+      `).join('');
+    } else {
+      albumsList.innerHTML = '<div class="list-group-item">Inga album hittades för denna grupp.</div>';
+    }
 
   } catch (error) {
     console.error("Detaljerad felinformation:", error);

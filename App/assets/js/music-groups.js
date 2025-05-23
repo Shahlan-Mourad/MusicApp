@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Get all bands
   let currentPage = 0;
   let totalPages = 0;
-  const itemsPerPage = 15;
+  const itemsPerPage = 12;
   let totalItems = 0;
 
   loadBands(); // Loads the initial list of bands.
