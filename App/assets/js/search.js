@@ -10,6 +10,15 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   let searchTimeout;
 
+  function getTypeIcon(type) {
+    if (type === "musicgroup")
+      return '<i class="bi bi-music-note-beamed text-primary"></i>';
+    if (type === "album") return '<i class="bi bi-disc text-success"></i>';
+    if (type === "artist")
+      return '<i class="bi bi-person-badge text-info"></i>';
+    return "";
+  }
+
   async function searchBands(query) {
     if (!query.trim()) {
       searchResults.innerHTML = "";
@@ -30,47 +39,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (filteredBands.length === 0) {
         searchResults.innerHTML = `
-                    <div class="col-12 text-center">
-                        <p class="text-muted">Inga resultat hittades för "${query}"</p>
-                    </div>
-                `;
+          <div class="col-12 text-center">
+            <p class="text-muted">Inga resultat hittades för "${query}"</p>
+          </div>
+        `;
         return;
       }
 
-      function getTypeIcon(type) {
-        if (type === "musicgroup")
-          return '<i class="bi bi-music-note-beamed text-primary"></i>';
-        if (type === "album") return '<i class="bi bi-disc text-success"></i>';
-        if (type === "artist")
-          return '<i class="bi bi-person-badge text-info"></i>';
-        return "";
-      }
-
-      searchResults.innerHTML = filteredBands
-        .map(
-          (band) => `
-                <div class="col-12 mb-2">
-                    <a href="details.html?id=${
-                      band.musicGroupId
-                    }" class="text-decoration-none">
-                        <div class="d-flex align-items-center border rounded p-2 bg-white shadow-sm" style="min-height:56px;">
-                            ${getTypeIcon(band.type)}
-                            <span class="ms-3 fs-5">${band.name}</span>
-                        </div>
-                    </a>
-                </div>
-            `
-        )
-        .join("");
+      const resultsHTML = `
+        <div class="col-12 mb-3">
+          <p class="text-muted">Hittade ${filteredBands.length} musikgrupper som matchar "${query}"</p>
+        </div>
+        ${filteredBands
+          .map(
+            (band) => `
+          <div class="col-12 mb-2">
+            <a href="details.html?id=${band.musicGroupId}" class="text-decoration-none">
+              <div class="d-flex align-items-center border rounded p-2 bg-white shadow-sm" style="min-height:56px;">
+                ${getTypeIcon(band.type)}
+                <span class="ms-3 fs-5">${band.name}</span>
+              </div>
+            </a>
+          </div>
+        `
+          )
+          .join("")}
+      `;
+      
+      searchResults.innerHTML = resultsHTML;
     } catch (error) {
       console.error("Sökfel:", error);
       searchResults.innerHTML = `
-                <div class="col-12">
-                    <div class="alert alert-danger">
-                        Ett fel uppstod vid sökningen. Försök igen senare.
-                    </div>
-                </div>
-            `;
+        <div class="col-12">
+          <div class="alert alert-danger">
+            <h4 class="alert-heading">Ett fel uppstod vid sökningen!</h4>
+            <p>${error.message || "Kunde inte slutföra sökningen. Kontrollera din internetanslutning och försök igen."}</p>
+          </div>
+        </div>
+      `;
     } finally {
       searchLoading.style.display = "none";
     }

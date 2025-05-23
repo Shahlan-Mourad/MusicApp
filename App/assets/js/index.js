@@ -36,36 +36,36 @@ document.addEventListener("DOMContentLoaded", async () => {
       // Update statistics on the website with animation
       statsContainer.innerHTML = `
                 <div class="col-md-4 fade-in">
-                    <div class="card mb-4 h-100">
+                    <div class="card mb-3 h-100">
                         <div class="card-body text-center">
-                            <i class="bi bi-music-note-beamed display-4 text-primary mb-3"></i>
-                            <h2 class="display-4 mb-2">${totalBands}</h2>
-                            <p class="text-muted h5">Musikgrupper</p>
-                            <a href="music-groups.html" class="btn btn-primary mt-3 w-100">
+                            <i class="bi bi-music-note-beamed display-5 text-primary"></i>
+                            <h2 class="display-5">${totalBands}</h2>
+                            <p class="h6">Musikgrupper</p>
+                            <a href="music-groups.html" class="btn btn-primary w-100">
                                 <i class="bi bi-music-note-beamed me-2"></i>Se alla musikgrupper
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 fade-in" style="animation-delay: 0.2s">
-                    <div class="card mb-4 h-100">
+                    <div class="card mb-3 h-100">
                         <div class="card-body text-center">
-                            <i class="bi bi-disc display-4 text-success mb-3"></i>
-                            <h2 class="display-4 mb-2">${totalAlbums}</h2>
-                            <p class="text-muted h5">Album</p>
-                            <a href="albums.html" class="btn btn-success mt-3 w-100">
+                            <i class="bi bi-disc display-5 text-success"></i>
+                            <h2 class="display-5">${totalAlbums}</h2>
+                            <p class="h6">Album</p>
+                            <a href="albums.html" class="btn btn-success w-100">
                                 <i class="bi bi-disc me-2"></i>Se alla album
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 fade-in" style="animation-delay: 0.4s">
-                    <div class="card mb-4 h-100">
+                    <div class="card mb-3 h-100">
                         <div class="card-body text-center">
-                            <i class="bi bi-person-badge display-4 text-info mb-3"></i>
-                            <h2 class="display-4 mb-2">${totalArtists}</h2>
-                            <p class="text-muted h5">Artister</p>
-                            <a href="artists.html" class="btn btn-info mt-3 w-100 text-white">
+                            <i class="bi bi-person-badge display-5 text-info"></i>
+                            <h2 class="display-5">${totalArtists}</h2>
+                            <p class="h6">Artister</p>
+                            <a href="artists.html" class="btn btn-info w-100 text-white">
                                 <i class="bi bi-person-badge me-2"></i>Se alla artister
                             </a>
                         </div>

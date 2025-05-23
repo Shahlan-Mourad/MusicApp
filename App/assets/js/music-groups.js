@@ -1,7 +1,7 @@
 'use strict';
 import MusicService from "./music-service.js";
 
-// Exportera funktionen på toppnivå
+// Export the top-level function
 export function renderPagination({currentPage, totalPages, onPageChange, paginationElement}) {
   let paginationHTML = "";
   const maxVisible = 5;
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
     bandsContainer.innerHTML = html; // Inserts generated HTML into the container.
   }
 
-  // Byt ut updatePagination mot anrop till renderPagination
+  // Replace update Pagination with call to render Pagination
   function updatePagination() {
     renderPagination({
       currentPage,

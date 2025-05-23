@@ -50,6 +50,51 @@
         </div>
         <div id="error-container" class="alert alert-danger" style="display:none;"></div>
         <div id="band-info"></div>
+
+        <!-- Buttons to show/hide sections -->
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <button id="toggleArtists" class="btn btn-outline-primary w-100">
+                    <i class="bi bi-person-badge"></i> Artister
+                </button>
+            </div>
+            <div class="col-md-6">
+                <button id="toggleAlbums" class="btn btn-outline-primary w-100">
+                    <i class="bi bi-disc"></i> Album
+                </button>
+            </div>
+        </div>
+
+       <!-- Sections for artists and albums -->
+        <div id="artists-section" class="mt-4" style="display: none;">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h3 class="card-title mb-0">
+                        <i class="bi bi-person-badge text-info me-2"></i>Artister
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div id="artists-list" class="list-group">
+                        <!-- Artists will be added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="albums-section" class="mt-4" style="display: none;">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h3 class="card-title mb-0">
+                        <i class="bi bi-disc text-success me-2"></i>Album
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div id="albums-list" class="list-group">
+                        <!-- Album will be added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Bootstrap JS -->
